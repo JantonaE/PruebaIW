@@ -1,0 +1,22 @@
+---
+export interface Props {
+  action: string;
+}
+const { action } = Astro.props;
+---
+
+<form method="POST" action={action}> 
+  <!-- bg-red-500 hover:bg-red-600 -->
+  <input 
+  type="submit" 
+  class="rounded text-center transition focus-visible:ring-2 ring-offset-2 outline outline-2 outline-black outline-offset-2 ring-gray-200 px-4 py-2 bg-white text-black hover:bg-gray-800  hover:text-white border-2 border-transparent cursor-pointer" 
+  value="Cerrar sesión"
+  onsubmit="" />
+</form>
+
+<script>
+  function onsubmit() {
+    localStorage.removeItem('token');
+  }
+
+</script>

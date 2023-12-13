@@ -1,0 +1,37 @@
+[
+    {
+        "emisor": "654fbef57e654dc35ca46cbe",
+        "receptor": "654fbf1b7e654dc35ca46cc2",
+        "producto": "654fe40c1338735046a7b841",
+        "contenido": "Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.",
+        "fecha_publicacion": "1/11/2023"
+    },
+    {
+        "emisor": "654fcaeae1936bb30e769828",
+        "receptor": "654fbf1b7e654dc35ca46cc2",
+        "producto": "654fe40c1338735046a7b841",
+        "contenido": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.",
+        "fecha_publicacion": "21/10/2023"
+    },
+    {
+        "emisor": "654fbefe7e654dc35ca46cbf",
+        "receptor": "654fbf1b7e654dc35ca46cc2",
+        "producto": "654fe40c1338735046a7b841",
+        "contenido": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.",
+        "fecha_publicacion": "10/10/2023"
+    },
+    {
+        "emisor": "654fbf1b7e654dc35ca46cc2",
+        "receptor": "654fbef57e654dc35ca46cbe",
+        "producto": "654fe40c1338735046a7b841",
+        "contenido": "Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio.",
+        "fecha_publicacion": "2/11/2023"
+    },
+    {
+        "emisor": "654fbf1b7e654dc35ca46cc2",
+        "receptor": "654fcaeae1936bb30e769828",
+        "producto": "654fe40c1338735046a7b841",
+        "contenido": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus.",
+        "fecha_publicacion": "22/10/2023"
+    }
+]

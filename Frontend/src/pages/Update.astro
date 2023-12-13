@@ -1,0 +1,149 @@
+---
+import Container from "@components/container.astro";
+import Layout from "@layouts/Layout.astro";
+import * as lib from "../lib/lib.ts";
+import { v2 as cloudinary } from "cloudinary";
+import { getUser } from "@pages/auth/auth.ts";
+import * as utils from "@lib/utils.ts";
+
+
+
+const id = Astro.url.searchParams.get("id");
+const product = await lib.fetchProductByProductId(id);
+
+// Configure Cloudinary with API credentials
+cloudinary.config({
+  cloud_name: import.meta.env.CLOUDINARY_CLOUDNAME,
+  api_key: import.meta.env.CLOUDINARY_APIKEY,
+  api_secret: import.meta.env.CLOUDINARY_APISECRET,
+});
+
+const loggedUser = getUser();
+
+const uploadStream = async (buffer: Uint8Array, option: any) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader
+      .upload_stream(option, (error, result) => {
+        if(error) return reject(error);
+        resolve(result);
+      })
+      .end(buffer);
+  });
+};
+
+if(Astro.request.method == "POST"){
+  try{
+    console.log("llega");
+    const data = await Astro.request.formData();
+    const titulo = data.get("titulo").toString();
+    const descripcion = data.get("descripcion").toString();
+    const coordenadas = utils.generarCoordenadasRandom();
+    const precio = Number(data.get("price"));
+    const peso = Number(data.get("peso"));
+    const edad = Number(data.get("edad"));
+    const auxDate = data.get("fecha_cierre").toString();
+    const file = data.getAll("file") as File[];
+
+    var partesFecha = auxDate.split("-");
+    console.log("edad " +edad);
+    // Las partes de la fecha están en el formato [mes, día, año]
+    var año = parseInt(partesFecha[0], 10).toString();
+    var mes = parseInt(partesFecha[1], 10).toString();
+    var dia = parseInt(partesFecha[2], 10).toString();
+
+    const fecha_cierre = dia+"/"+mes+"/"+año;
+    
+    console.log("fecha cierre: " + fecha_cierre);
+
+    let imagenes: String[] = [];
+
+    for(let i = 0; i < file.length; i++){
+        imagenes.push("imagen"+i);
+    }
+
+    console.log(imagenes);
+    
+    const res = await lib.updateProduct(
+        id,loggedUser.idUser, titulo, descripcion, coordenadas.latitud, coordenadas.longitud, edad, precio, peso, fecha_cierre, imagenes);
+
+    console.log("Posteando imagenes");
+
+    for(let i = 0; i < file.length; i++){
+        const imagen = file[i];
+        //console.log(imagen.name);
+        const arrayBuffer = await imagen.arrayBuffer();
+        const uit8array = new Uint8Array(arrayBuffer);
+        //console.log("Array Buffer:", arrayBuffer);
+        //console.log("Uint8Array:", uit8array);
+        const response = await uploadStream(uit8array, {
+            folder: res.idProd, public_id: "imagen" + i
+        });
+        //console.log(response);
+    }
+
+    console.log("Finished");
+
+    return Astro.redirect("/");
+
+  }catch(error){
+    if(error instanceof Error){
+      console.error(error.message);
+    }
+  }
+}
+let date = new Date();
+
+date.setDate(date.getDate() + 1);
+---
+
+
+<Layout title={"Actualizar producto " + id}>
+  <Container>
+    <div class="flex flex-col items-center justify-center my-20">
+      <h1>Actualizando el producto con id: {id}</h1>
+      <form id="updateProd" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="idProd" value={id} />
+        <div class="grid gap-4 mb-4 grid-cols-2">
+            <div class="col-span-2">
+                <label for="titulo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
+                <input value={product.titulo} type="text" name="titulo" id="titulo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre del producto" required>
+            </div>
+            <div class="col-span-2">
+                <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion</label>
+                <textarea value={product.descripcion} id="descripcion" name="descripcion" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Descripcion del producto"></textarea>                    
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+                <label for="edad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Edad</label>
+                <input value={product.edad} min="0" type="number" name="edad" id="edad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="E.j 100 euros" required>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+                <input value={product.precio} min="0" type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="E.j 100 euros" required>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+                <label for="peso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peso</label>
+                <input value={product.peso} min="0" type="number" name="peso" id="peso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="E.j 10kg" required>
+            </div>
+            
+            <div class="col-span-2 sm:col-span-1">
+                <label for="fecha_cierre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Cierre</label>
+                <input id="date" type="date" name="fecha_cierre" value="" min={date.toISOString().split("T")[0]} class="my-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Fecha de Cierre" required>
+            </div>
+
+            <div class="col-span-2 sm:col-span-1">
+                <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subir imagen</label>
+                <input type="file" name="file" id="file" required multiple/>
+            </div>
+
+        <button
+          id="updateProd"
+          type="submit"
+          class="flex mt-5 items-center justify-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <span class="flex-1 whitespace-nowrap">Actualizar Producto</span>
+          
+        </button>
+        
+      </form>
+    </div>
+  </Container>
+</Layout>

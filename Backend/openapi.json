@@ -1,0 +1,1103 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Jesus Antona",
+    "description": "Ingenier\u00eda Web",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/Productos/": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Find All Products",
+        "description": "Devuelve una lista de productos filtrados",
+        "operationId": "find_all_products_Productos__get",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "B\u00fasqueda en Titulo o Descripcion",
+              "title": "Search"
+            },
+            "description": "B\u00fasqueda en Titulo o Descripcion"
+          },
+          {
+            "name": "distanciaMin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Distancia (m\u00edmima): Diferencia de posiciones",
+              "title": "Distanciamin"
+            },
+            "description": "Distancia (m\u00edmima): Diferencia de posiciones"
+          },
+          {
+            "name": "distanciaMax",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Distancia (m\u00e1xima): Diferencia de posiciones",
+              "title": "Distanciamax"
+            },
+            "description": "Distancia (m\u00e1xima): Diferencia de posiciones"
+          },
+          {
+            "name": "userlat",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Latitud del usuario",
+              "title": "Userlat"
+            },
+            "description": "Latitud del usuario"
+          },
+          {
+            "name": "userlong",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Longitud del usuario",
+              "title": "Userlong"
+            },
+            "description": "Longitud del usuario"
+          },
+          {
+            "name": "edad",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Edad del usuario",
+              "title": "Edad"
+            },
+            "description": "Edad del usuario"
+          },
+          {
+            "name": "precioMin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Precio (m\u00ednimo del rango)",
+              "title": "Preciomin"
+            },
+            "description": "Precio (m\u00ednimo del rango)"
+          },
+          {
+            "name": "precioMax",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Precio (m\u00e1ximo del rango)",
+              "title": "Preciomax"
+            },
+            "description": "Precio (m\u00e1ximo del rango)"
+          },
+          {
+            "name": "fechaPubMin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Fecha de publicaci\u00f3n (m\u00ednima) - El formato debe ser 'dd/mm/yyyy'",
+              "title": "Fechapubmin"
+            },
+            "description": "Fecha de publicaci\u00f3n (m\u00ednima) - El formato debe ser 'dd/mm/yyyy'"
+          },
+          {
+            "name": "fechaPubMax",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Fecha de publicaci\u00f3n (m\u00e1xima) - El formato debe ser 'dd/mm/yyyy'",
+              "title": "Fechapubmax"
+            },
+            "description": "Fecha de publicaci\u00f3n (m\u00e1xima) - El formato debe ser 'dd/mm/yyyy'"
+          },
+          {
+            "name": "fechaCierreMin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Fecha de cierre (m\u00ednima) - El formato debe ser 'dd/mm/yyyy'",
+              "title": "Fechacierremin"
+            },
+            "description": "Fecha de cierre (m\u00ednima) - El formato debe ser 'dd/mm/yyyy'"
+          },
+          {
+            "name": "fechaCierreMax",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Fecha de cierre (m\u00e1xima) - El formato debe ser 'dd/mm/yyyy'",
+              "title": "Fechacierremax"
+            },
+            "description": "Fecha de cierre (m\u00e1xima) - El formato debe ser 'dd/mm/yyyy'"
+          },
+          {
+            "name": "vendedor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Vendedor del producto",
+              "title": "Vendedor"
+            },
+            "description": "Vendedor del producto"
+          },
+          {
+            "name": "sortedBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Campo por el que se ordena la lista",
+              "title": "Sortedby"
+            },
+            "description": "Campo por el que se ordena la lista"
+          },
+          {
+            "name": "desc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Ordenar por orden descendente",
+              "default": false,
+              "title": "Desc"
+            },
+            "description": "Ordenar por orden descendente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto-Output"
+                  },
+                  "title": "Response Find All Products Productos  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Create Producto",
+        "description": "Crea un producto y lo devuelve",
+        "operationId": "create_producto_Productos__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Producto-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Productos/{id}": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Find One Product",
+        "description": "Devuelve el producto con id pasado por par\u00e1metro",
+        "operationId": "find_one_product_Productos__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id del producto a buscar",
+              "title": "Id"
+            },
+            "description": "Id del producto a buscar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Delete Product",
+        "description": "Elimina el producto con id pasado por par\u00e1metro",
+        "operationId": "delete_product_Productos__id__delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id del producto a eliminar",
+              "title": "Id"
+            },
+            "description": "Id del producto a eliminar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Update Product",
+        "description": "Actualiza el producto con id pasado por par\u00e1metro y lo devuelve",
+        "operationId": "update_product_Productos__id__put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id del producto a actualizar",
+              "title": "Id"
+            },
+            "description": "Id del producto a actualizar"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Producto-Input"
+                  }
+                ],
+                "description": "Datos del producto a actualizar",
+                "title": "Producto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Usuarios/": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Find All Users",
+        "description": "Devuelve una lista de usuarios filtrados",
+        "operationId": "find_all_users_Usuarios__get",
+        "parameters": [
+          {
+            "name": "letraNombre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Primera letra del nombre",
+              "title": "Letranombre"
+            },
+            "description": "Primera letra del nombre"
+          },
+          {
+            "name": "letraApellido",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Primera letra del apellido",
+              "title": "Letraapellido"
+            },
+            "description": "Primera letra del apellido"
+          },
+          {
+            "name": "valoracion",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Valoracion del usuario",
+              "title": "Valoracion"
+            },
+            "description": "Valoracion del usuario"
+          },
+          {
+            "name": "esAdmin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Rol del usuario",
+              "title": "Esadmin"
+            },
+            "description": "Rol del usuario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Usuario-Output"
+                  },
+                  "title": "Response Find All Users Usuarios  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Create User",
+        "description": "Crea un Usuario y lo devuelve",
+        "operationId": "create_user_Usuarios__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Usuarios/{id}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Find One User",
+        "description": "Devuelve el usuario con id pasado por par\u00e1metro",
+        "operationId": "find_one_user_Usuarios__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id del usuario a buscar",
+              "title": "Id"
+            },
+            "description": "Id del usuario a buscar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Delete User",
+        "description": "Elimina el usuario con id pasado por par\u00e1metro",
+        "operationId": "delete_user_Usuarios__id__delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id del usuario a eliminar",
+              "title": "Id"
+            },
+            "description": "Id del usuario a eliminar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Update User",
+        "description": "Actualiza el usuario con id pasado por par\u00e1metro y lo devuelve",
+        "operationId": "update_user_Usuarios__id__put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id del usuario a actualizar",
+              "title": "Id"
+            },
+            "description": "Id del usuario a actualizar"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Usuario-Input"
+                  }
+                ],
+                "description": "Datos del usuario a actualizar",
+                "title": "User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Usuarios/Username/{username}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Find User By Username",
+        "description": "Devuelve el usuario con username pasado por par\u00e1metro",
+        "operationId": "find_User_By_Username_Usuarios_Username__username__get",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Usuario del usuario a buscar",
+              "title": "Username"
+            },
+            "description": "Usuario del usuario a buscar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Producto-Input": {
+        "properties": {
+          "idProd": {
+            "type": "string",
+            "title": "Idprod"
+          },
+          "vendedor": {
+            "type": "string",
+            "title": "Vendedor"
+          },
+          "titulo": {
+            "type": "string",
+            "title": "Titulo"
+          },
+          "descripcion": {
+            "type": "string",
+            "title": "Descripcion"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "long": {
+            "type": "number",
+            "title": "Long"
+          },
+          "direccion": {
+            "type": "string",
+            "title": "Direccion"
+          },
+          "edad": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Edad"
+          },
+          "precio": {
+            "type": "number",
+            "title": "Precio"
+          },
+          "peso": {
+            "type": "number",
+            "title": "Peso"
+          },
+          "fecha_publicacion": {
+            "type": "string",
+            "title": "Fecha Publicacion"
+          },
+          "fecha_cierre": {
+            "type": "string",
+            "title": "Fecha Cierre"
+          },
+          "pagado": {
+            "type": "boolean",
+            "title": "Pagado"
+          },
+          "valorado": {
+            "type": "boolean",
+            "title": "Valorado"
+          },
+          "imagenes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Imagenes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idProd",
+          "vendedor",
+          "titulo",
+          "descripcion",
+          "lat",
+          "long",
+          "direccion",
+          "edad",
+          "precio",
+          "peso",
+          "fecha_publicacion",
+          "fecha_cierre",
+          "pagado",
+          "valorado"
+        ],
+        "title": "Producto"
+      },
+      "Producto-Output": {
+        "properties": {
+          "idProd": {
+            "type": "string",
+            "title": "Idprod"
+          },
+          "vendedor": {
+            "type": "string",
+            "title": "Vendedor"
+          },
+          "titulo": {
+            "type": "string",
+            "title": "Titulo"
+          },
+          "descripcion": {
+            "type": "string",
+            "title": "Descripcion"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "long": {
+            "type": "number",
+            "title": "Long"
+          },
+          "direccion": {
+            "type": "string",
+            "title": "Direccion"
+          },
+          "edad": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Edad"
+          },
+          "precio": {
+            "type": "number",
+            "title": "Precio"
+          },
+          "peso": {
+            "type": "number",
+            "title": "Peso"
+          },
+          "fecha_publicacion": {
+            "type": "string",
+            "title": "Fecha Publicacion"
+          },
+          "fecha_cierre": {
+            "type": "string",
+            "title": "Fecha Cierre"
+          },
+          "pagado": {
+            "type": "boolean",
+            "title": "Pagado"
+          },
+          "valorado": {
+            "type": "boolean",
+            "title": "Valorado"
+          },
+          "imagenes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Imagenes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idProd",
+          "vendedor",
+          "titulo",
+          "descripcion",
+          "lat",
+          "long",
+          "direccion",
+          "edad",
+          "precio",
+          "peso",
+          "fecha_publicacion",
+          "fecha_cierre",
+          "pagado",
+          "valorado",
+          "imagenes"
+        ],
+        "title": "Producto"
+      },
+      "Usuario-Input": {
+        "properties": {
+          "idUser": {
+            "type": "string",
+            "title": "Iduser"
+          },
+          "usuario": {
+            "type": "string",
+            "title": "Usuario"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "apellido1": {
+            "type": "string",
+            "title": "Apellido1"
+          },
+          "apellido2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Apellido2"
+          },
+          "valoracion": {
+            "type": "number",
+            "title": "Valoracion"
+          },
+          "esAdmin": {
+            "type": "boolean",
+            "title": "Esadmin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idUser",
+          "usuario",
+          "nombre",
+          "apellido1",
+          "valoracion",
+          "esAdmin"
+        ],
+        "title": "Usuario"
+      },
+      "Usuario-Output": {
+        "properties": {
+          "idUser": {
+            "type": "string",
+            "title": "Iduser"
+          },
+          "usuario": {
+            "type": "string",
+            "title": "Usuario"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "apellido1": {
+            "type": "string",
+            "title": "Apellido1"
+          },
+          "apellido2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Apellido2"
+          },
+          "valoracion": {
+            "type": "number",
+            "title": "Valoracion"
+          },
+          "esAdmin": {
+            "type": "boolean",
+            "title": "Esadmin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idUser",
+          "usuario",
+          "nombre",
+          "apellido1",
+          "apellido2",
+          "valoracion",
+          "esAdmin"
+        ],
+        "title": "Usuario"
+      },
+      "UsuarioCreate": {
+        "properties": {
+          "usuario": {
+            "type": "string",
+            "title": "Usuario"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "apellido1": {
+            "type": "string",
+            "title": "Apellido1"
+          },
+          "apellido2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Apellido2"
+          },
+          "valoracion": {
+            "type": "number",
+            "title": "Valoracion"
+          },
+          "esAdmin": {
+            "type": "boolean",
+            "title": "Esadmin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "usuario",
+          "nombre",
+          "apellido1",
+          "valoracion",
+          "esAdmin"
+        ],
+        "title": "UsuarioCreate"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "Default"
+    },
+    {
+      "url": "http://localhost:8000",
+      "description": "Local dev"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+---
+export interface Props {
+  baseUrl: string;
+  clientId: string;
+  callbackUrl: string;
+  audience: string;
+  block : boolean;
+}
+
+const { baseUrl, clientId, callbackUrl, audience, block } = Astro.props;
+---
+
+<!-- https://auth0.com/docs/get-started/authentication-and-authorization-flow/call-your-api-using-the-authorization-code-flow-->
+<form method="GET" action={`${baseUrl}/authorize`}>
+  <input hidden name="response_type" value="code" />
+  <!-- https://auth0.com/docs/get-started/authentication-and-authorization-flow/add-login-auth-code-flow#parameters -->
+  <input hidden name="client_id" value={clientId} />
+  <input hidden name="audience" value={audience} />
+  <input hidden name="redirect_uri" value={callbackUrl} />
+  <input hidden name="scope" value="openid profile offline_access email" />
+  <!-- Apply style to button if blocked is true -->
+
+  <input type="submit" value="Iniciar sesión / Registrarse" class="rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-4 py-2 bg-black text-white hover:bg-gray-800  border-2 border-transparent cursor-pointer" />

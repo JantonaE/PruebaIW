@@ -1,0 +1,48 @@
+---
+import { UploadStream } from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
+
+// Configure Cloudinary with API credentials
+cloudinary.config({
+  cloud_name: import.meta.env.CLOUDINARY_CLOUDNAME,
+  api_key: import.meta.env.CLOUDINARY_APIKEY,
+  api_secret: import.meta.env.CLOUDINARY_APISECRET,
+});
+
+const {idproducto, imagenes} = Astro.props;
+
+let cloudUrl = cloudinary.url("placeholder", {
+  width: 400,
+  height: 250,
+  crop: "fill",
+});
+
+// Check if there are images for the product
+if (imagenes !== undefined && imagenes.length > 0) {
+  // Generate Cloudinary URL for the first image
+  let temp = cloudinary.url(`${idproducto}/${imagenes[0]}`, {
+    width: 400,
+    height: 250,
+    crop: "fill",
+  });
+
+  // Check if the image exists
+  let exist = await fetch(temp)
+    .then(function (response) {
+      return response.status != 404;
+    })
+    .catch(function () {
+      return false;
+    });
+
+  // If the image exists, update cloudUrl
+  if (exist) {
+    cloudUrl = temp;
+  }
+}
+---
+
+<img
+  class="w-full h-64 object-cover rounded-t-lg"
+  src={cloudUrl}
+/>

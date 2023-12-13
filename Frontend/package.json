@@ -1,0 +1,45 @@
+{
+  "name": "@iweb/b7",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "v": "node -v",
+    "openapi": "openapi-generator-cli generate -i ../backend/openapi.json -g typescript-fetch -o src/api --additional-properties=stringEnums=true"
+  },
+  "dependencies": {
+    "@astrojs/alpinejs": "^0.1.3",
+    "@astrojs/mdx": "^0.11.6",
+    "@astrojs/react": "^3.0.6",
+    "@astrojs/svelte": "^4.0.4",
+    "@astrojs/tailwind": "^5.0.2",
+    "@astrojs/vercel": "^5.2.0",
+    "@auth/core": "^0.18.3",
+    "@auth0/auth0-spa-js": "^2.1.2",
+    "@cloudinary/url-gen": "^1.13.0",
+    "@fontsource/inter": "^4.5.15",
+    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "@paypal/paypal-js": "^7.1.1",
+    "@types/alpinejs": "^3.13.5",
+    "alpinejs": "^3.13.3",
+    "astro": "^3.6.0",
+    "astro-feather-icons": "^1.0.2",
+    "astro-icon": "^0.8.1",
+    "astro-seo": "^0.6.1",
+    "auth-astro": "^3.0.1",
+    "cloudinary": "^1.41.0",
+    "svelte-geolocation": "^0.3.0",
+    "svelte-map-leaflet": "^0.5.0",
+    "tailwindcss": "^3.3.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "leaflet": "^1.9.4",
+    "svelte-leafletjs": "^0.10.0"
+  }
+}

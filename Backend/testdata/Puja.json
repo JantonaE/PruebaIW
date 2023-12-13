@@ -1,0 +1,26 @@
+[
+    {
+        "cantidad": 100,
+        "pujador": "654fbef57e654dc35ca46cbe",
+        "producto": "654fe3e71338735046a7b83e",
+        "fecha_puja": "14/7/2023"
+    },
+    {
+        "cantidad": 200,
+        "pujador": "654fbef57e654dc35ca46cbe",
+        "producto": "654fe40c1338735046a7b841",
+        "fecha_puja": "22/8/2023"
+    },
+    {
+        "cantidad": 300,
+        "pujador": "654fcaeae1936bb30e769828",
+        "producto": "654fe40c1338735046a7b841",
+        "fecha_puja": "24/9/2023"
+    },
+    {
+        "cantidad": 400,
+        "pujador": "654fbefe7e654dc35ca46cbf",
+        "producto": "654fe40c1338735046a7b841",
+        "fecha_puja": "9/10/2023"
+    }
+]
