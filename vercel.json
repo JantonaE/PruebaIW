@@ -8,7 +8,7 @@
     ],
     "routes": [
       { "handle": "filesystem" },
-      { "src": "/.*", "dest": "/Frontend/src/pages/index.html" }
+      { "src": "/.*", "dest": "/Frontend/src/pages/index.astro" }
     ]
   }
   
