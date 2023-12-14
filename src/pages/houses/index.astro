@@ -100,7 +100,7 @@ const house = await dbHouses.findAllHouses();
                     <p>{house.descripcion}</p>
                 </div>
                 <div>
-                  {house.images.map((image) => (
+                  {house.images.map((image : string) => (
                     <img src={image} alt="" class="w-10 h-10 rounded rounded-full" />
                   ))}
                 </div>
