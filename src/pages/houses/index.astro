@@ -106,7 +106,7 @@ const house = await dbHouses.findAllHouses();
                 </div>
                 <div class="justify-end">
                   <form method="POST" id="formDelete">
-                    <input type="hidden" name="id" value={house._id} />
+                    <input type="hidden" name="id" value={String(house._id)} />
                     <input type="hidden" name="action" value="DELETE" />
                     <button type="submit" class="rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-4 py-2 bg-red-600 text-white hover:bg-gray-800 border-2 border-transparent cursor-pointer">
                     Eliminar
