@@ -1,0 +1,23 @@
+---
+import LayoutNoNav from "../../layouts/LayoutNoNav.astro";
+import Link from "../../components/ui/link.astro";
+import Container from "../../components/container.astro";
+---
+
+<LayoutNoNav title="Login Success">
+  <Container>
+    <main class="place-items-center pt-16 pb-8 md:pt-8 content-center">
+      <div class="snap-center">
+        <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg">
+          ¡Inicio de sesión correcto! 🎉
+        </h1>
+        <p class="text-lg mt-4 text-slate-600 max-w-xl">
+          Haga click en el siguiente botón para ir a la página principal.
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-3 snap-center">
+          <Link href="/" rel="noopener">Inicio</Link>
+        </div>
+      </div>
+    </main>
+  </Container>
+</Layout>

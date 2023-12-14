@@ -1,0 +1,59 @@
+---
+import type { APIContext } from "astro";
+import { setCookies } from "../../lib/auth0";
+import cookies from "../../cookies";
+import { setUser } from "../../lib/auth";
+
+const code = Astro.url.searchParams.get("code") as string;
+
+  const payload = new URLSearchParams({
+    grant_type: "authorization_code",
+    redirect_uri: Astro.url.origin,
+    client_id: import.meta.env.AUTH0_CLIENTID,
+    client_secret: import.meta.env.AUTH0_SECRET,
+    audience: import.meta.env.AUTH0_AUDIENCE,
+    code: code,
+  });
+
+  const response = await fetch(
+    `${import.meta.env.AUTH0_DOMAIN}/oauth/token`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: payload.toString(),
+    }
+  ).then((x) => x.json());
+  
+  Astro.cookies.set(cookies.accessToken, response.access_token.toString(), {
+      path: "/",
+      expires: new Date(Date.now() + response.expires_in),
+    });
+    Astro.cookies.set(cookies.refreshToken, response.refresh_token as string, {
+      path: "/",
+    });
+
+    // Replace 'your-auth0-domain' with your Auth0 domain
+    const auth0Domain = import.meta.env.AUTH0_DOMAIN;
+    const accessToken = response.access_token.toString();
+
+    // Make a request to the /userinfo endpoint
+    fetch(`${auth0Domain}/userinfo`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((userData) => {
+        console.log('User Information:', userData);
+        setUser(userData);
+      })
+      .catch((error) => {
+        console.error('Error fetching user information:', error);
+      });
+  
+  return Astro.redirect("/auth/loginsuccess");
+---

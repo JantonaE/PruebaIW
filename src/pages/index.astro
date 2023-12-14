@@ -1,0 +1,13 @@
+---
+import Container from "../components/container.astro";
+import IndexText from "../components/IndexText.astro";
+import Layout from "../layouts/Layout.astro";
+import Map from "../components/Map.svelte";
+---
+
+<Layout title="">
+  <Container>
+    <IndexText />
+    <Map client:only />
+  </Container>
+</Layout>
