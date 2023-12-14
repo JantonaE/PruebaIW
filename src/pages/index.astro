@@ -3,11 +3,17 @@ import Container from "../components/container.astro";
 import IndexText from "../components/IndexText.astro";
 import Layout from "../layouts/Layout.astro";
 import Map from "../components/Map.svelte";
+
+import * as lib from "../lib/mongo/house";
+
+const data = await lib.findAllHouses();
+console.log(data);
+
 ---
 
 <Layout title="">
   <Container>
     <IndexText />
-    <Map client:only />
+    <Map prods={data} client:only />
   </Container>
 </Layout>

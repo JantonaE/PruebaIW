@@ -19,7 +19,7 @@
   };
 
   let prodCoords = prods.map((item) => {
-    return [item.lat, item.long];
+    return [item.lat, item.lon];
   });
 
   let screenWidth;
@@ -40,24 +40,7 @@
   }
 
   console.log(prods);
-  const estado = new Map();
-
-  prods.forEach((el) => {
-    const now = new Date();
-    var partesFecha = el.fecha_cierre.split("/");
-    // Las partes de la fecha están en el formato [mes, día, año]
-    var dia = parseInt(partesFecha[0], 10) + 1;
-    var mes = parseInt(partesFecha[1], 10) - 1;
-    var año = parseInt(partesFecha[2], 10);
-
-    // Creamos un objeto Date utilizando las partes de la fecha
-    var closeDate = new Date(año, mes, dia);
-    closeDate.setDate(closeDate.getDate() - 1);
-    estado.set(
-      el.idProd,
-      el.pagado ? "Pagado" : compararFechas(now, closeDate),
-    );
-  });
+  
   let leafletMap;
 
   onMount(() => {
@@ -75,28 +58,14 @@
       <!-- center: changeCoords(coords), -->
       <LeafletMap bind:this={leafletMap} options={mapOptions}>
         <TileLayer url={tileUrl} options={tileLayerOptions} />
-        {console.log([...prods])}
+        
         {#each [...prods] as item}
-          {console.log([item.lat, item.long])}
-          <Marker latLng={[item.lat, item.long]}>
+          
+          <Marker latLng={[item.lat, item.lon]}>
             <Popup>
-              <div class="flex">
-                <a href={"/producto/" + item.idProd}><b>{item.titulo}</b></a>
-                <div class="ms-3 font-bold text-white dark:text-white">
-                  <span
-                    class={`rounded-md p-1 ${
-                      estado.get(item.idProd) === "Abierto"
-                        ? "bg-green-400 text-green-900"
-                        : item.pagado
-                          ? "bg-violet-400 text-violet-900"
-                          : "bg-red-400 text-red-900"
-                    }`}>
-                    {estado.get(item.idProd)}
-                  </span>
-                </div>
-              </div>
+              
 
-              <div class="mt-2 text-black">Ubicación: {item.direccion}</div>
+              <div class="mt-2 text-black">Titulo: {item.titulo}</div>
               <div class="mt-2 text-black">Descripción: {acortarTexto(item.descripcion, 100)}</div>
             </Popup>
           </Marker>
@@ -110,7 +79,7 @@
       style="border-top-color:transparent"
       class="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin">
     </div>
-    <p class="ml-2">No products found.</p>
+    <p class="ml-2">No houses found.</p>
   </div>
 {/if}
 

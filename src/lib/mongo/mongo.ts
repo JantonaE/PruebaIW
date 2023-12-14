@@ -32,3 +32,8 @@ export const Users = async () => {
   
 };
 
+export const Houses = async () => {
+  const db = await getDB();
+  return db.collection("House");
+  
+};

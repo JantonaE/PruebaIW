@@ -9,19 +9,14 @@ let user = getUser();
 <main class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-8">
   <div>
     <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight">
-      {user && "Bienvenido/a de vuelta a elRastro, " + user.nickname}
-      {!user && "Bienvenido/a a elRastro"}
+      {user && "Bienvenido/a de vuelta a ..., " + user.nickname}
+      {!user && "Bienvenido/a a ..."}
     </h1>
     <p class="text-lg mt-4 text-slate-600 max-w-xl">
-      Bienvenido a elRastro, la plataforma de pujas de productos donde puedes
-      comprar y vender productos de segunda mano. Puedes ver la lista de
-      productos disponibles o verlos en el mapa.
+      Examen de Ingeniería Web - Jesús Antona Espejo
     </p>
     <div class="mt-6 flex flex-col sm:flex-row gap-3">
-      <Link href="/viviendas/lista" rel="noopener">Lista</Link>
-      <Link size="lg" style="outline" rel="noopener" href="/viviendas/mapa">
-        Mapa
-      </Link>
+      <Link href="/houses" rel="noopener">Houses</Link>
     </div>
   </div>
 </main>
