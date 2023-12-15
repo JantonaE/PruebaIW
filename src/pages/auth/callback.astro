@@ -3,6 +3,8 @@ import type { APIContext } from "astro";
 import { setCookies } from "../../lib/auth0";
 import cookies from "../../cookies";
 import { setUser } from "../../lib/auth";
+import { Log } from "../../api/Log";
+import * as dbLogs from "../../lib/mongo/logs.js";
 
 const code = Astro.url.searchParams.get("code") as string;
 
@@ -50,6 +52,16 @@ const code = Astro.url.searchParams.get("code") as string;
       .then((userData) => {
         console.log('User Information:', userData);
         setUser(userData);
+
+        console.log("UserData: ");
+        let log = new Log(
+          userData.name!.toString(),
+          userData.updated_at!.toString(),
+          "",
+          userData.sub
+        );
+        dbLogs.createLog(log);
+        console.log(userData);
       })
       .catch((error) => {
         console.error('Error fetching user information:', error);

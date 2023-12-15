@@ -6,6 +6,7 @@ export function getUser() {
 
 export function setUser(newUser: any) {
   user = newUser;
+
   // if(newUser === null) {
   //   user = null;
   // } else{

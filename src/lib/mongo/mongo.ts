@@ -43,3 +43,9 @@ export const Eventuals = async () => {
   return db.collection("Eventual");
   
 };
+
+export const Logs = async () => {
+  const db = await getDB();
+  return db.collection("Log");
+  
+};

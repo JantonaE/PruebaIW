@@ -1,0 +1,40 @@
+---
+import Container from "../../components/container.astro";
+import Layout from "../../layouts/Layout.astro";
+import * as utils from "../../lib/utils"
+import * as cloudinary from "../../lib/cloudinary"
+import { Eventual } from "../../api/Eventual";
+import { getUser } from "../../lib/auth";
+
+import { Log } from "../../api/Log";
+import * as dbLogs from "../../lib/mongo/logs.js";
+
+const log = await dbLogs.findAllLogs();
+
+
+---
+
+<Layout title="Logs">
+  <Container>
+    <div>
+        {
+            log.map((log) => (
+               <li>
+                <div class="flex outline outline-1 mb-4 rounded text-left">
+                  <div class="me-40 w-40">
+                      <p class="m-1">{log.usuario}</p>
+                      <p class="m-1">{log.timestamp}</p>
+                      <p class="m-1">{log.caducidad}</p>
+                      <p class="m-1">{log.token}</p>
+                  </div>
+                  
+                  
+                </div>
+            </li>
+            ))
+            }
+    </div>
+          
+        
+  </Container>
+</Layout>
