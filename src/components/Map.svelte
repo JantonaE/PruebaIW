@@ -63,10 +63,9 @@
           
           <Marker latLng={[item.lat, item.lon]}>
             <Popup>
-              
-
-              <div class="mt-2 text-black">Titulo: {item.titulo}</div>
-              <div class="mt-2 text-black">Descripción: {acortarTexto(item.descripcion, 100)}</div>
+              <div class="mt-2 text-black">Nombre: {item.nombre}</div>
+              <div class="mt-2 text-black">Lugar: {item.lugar}</div>
+              <div class="mt-2 text-black">{item.timestamp}</div>
             </Popup>
           </Marker>
         {/each}
@@ -79,7 +78,7 @@
       style="border-top-color:transparent"
       class="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin">
     </div>
-    <p class="ml-2">No houses found.</p>
+    <p class="ml-2">No Events found.</p>
   </div>
 {/if}
 

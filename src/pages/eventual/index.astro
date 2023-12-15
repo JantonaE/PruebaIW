@@ -76,11 +76,31 @@ if (Astro.request.method === "POST") {
 
         return Astro.redirect("/eventual");
       } if(action == "FILTER"){ // filtrar
-        //const search = data.get("search");
-        //console.log(search);
-        //filter = true;
+        const search = data.get("search");
+        console.log(search);
+        filter = true;
+        console.log(search);
         //query = { nombre: search };
-        //return Astro.redirect("/eventuals");
+        /*
+        
+        const geocoder = new google.maps.Geocoder();
+
+        // Crear un objeto de solicitud de geocodificación
+        const request = { address: postalCode };
+
+        // Realizar la solicitud de geocodificación
+        geocoder.geocode(request, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+            const location = results[0].geometry.location;
+            const lat = location.lat();
+            const lng = location.lng();
+            alert(`Latitud: ${lat}, Longitud: ${lng}`);
+            } else {
+            alert('Error al obtener la información de ubicación.');
+            }
+        });
+        return Astro.redirect("/eventual");
+        */
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -114,11 +134,11 @@ if (filter){
               class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               for="inline-full-name"
               >
-              Titulo:
+              Dirección Postal:
             </label> 
             </div>
             <div class="md:w-2/3"></div>
-            <input type="text" name="search" class="m-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Titulo" />
+            <input type="text" name="search" class="m-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Codigo Postal" />
             <div class="md:flex md:items-center">
               
               <div>
@@ -150,6 +170,7 @@ if (filter){
                 name="nombre"
                 type="text"
                 placeholder="Nombre"
+                required
                 />
             </div>
           </div>
@@ -163,12 +184,13 @@ if (filter){
               </label>
             </div>
             <div class="md:w-2/3">
-              <textarea
+              <input
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="inline-email"
+                type="number"
                 name="lugar"
   
-                placeholder="Descripcion de la propiedad"
+                placeholder="Descripcion de la propiedad" required
                 />
             </div>
           </div>
@@ -187,6 +209,7 @@ if (filter){
                 id="inline-email"
                 type="date"
                 name="timestamp"
+                required
                 />
             </div>
           </div>
@@ -239,6 +262,9 @@ if (filter){
                   </form>
                   <a class="ml-2 rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-4 py-2 bg-blue-600 text-white hover:bg-gray-800 border-2 border-transparent cursor-pointer" href={"/eventual/update?id="+eventual._id}>
                     Editar
+                  </a>
+                  <a class="ml-2 rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-4 py-2 bg-blue-600 text-white hover:bg-gray-800 border-2 border-transparent cursor-pointer" href={"/eventual/event?id="+eventual._id}>
+                    Ver Mas
                   </a>
                 </div>
 

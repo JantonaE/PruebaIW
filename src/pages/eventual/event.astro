@@ -1,0 +1,34 @@
+---
+import Container from "../../components/container.astro";
+import Layout from "../../layouts/Layout.astro";
+import * as dbEventuals from "../../lib/mongo/eventual.js";
+import * as utils from "../../lib/utils"
+import * as cloudinary from "../../lib/cloudinary"
+import { Eventual } from "../../api/Eventual";
+import { getUser } from "../../lib/auth";
+
+
+const id = Astro.url.searchParams.get("id");
+const eventual = await dbEventuals.getEventual(id!);
+console.log(eventual);
+
+---
+
+
+<Layout title={"Evento con id:  " + id}>
+  <Container>
+    <div class="flex flex-col items-center justify-center my-20">
+        <div>
+            {eventual?.images.map((image : string) => (
+              <img src={image} alt="" class="w-34 h-34 rounded rounded-full" />
+            ))}
+          </div>
+      <h1 class="text-xl">Nombre del evento: {eventual?.nombre}</h1>
+      <h1 class="text-xl">Fecha del evento: {eventual?.timestamp}</h1>
+      <h1 class="text-xl">Lugar del evento: {eventual?.lugar}</h1>
+      <h1 class="text-xl">Coordenadas del evento: {eventual?.lat} , {eventual?.lon}</h1>
+      <h1 class="text-xl">Organizador del evento: {eventual?.organizador}</h1>
+      
+    </div>
+  </Container>
+</Layout>
