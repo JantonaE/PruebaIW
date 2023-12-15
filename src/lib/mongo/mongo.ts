@@ -37,3 +37,9 @@ export const Houses = async () => {
   return db.collection("House");
   
 };
+
+export const Eventuals = async () => {
+  const db = await getDB();
+  return db.collection("Eventual");
+  
+};
